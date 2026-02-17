@@ -25,8 +25,15 @@ headers = {
 
 response = requests.post("https://b12.io/apply/submission", data=payload, headers=headers)
 
-if response.status_code == 200:
-    print("Application submitted successfully!")
+print(f"Status Code: {response.status_code}")
+
+try:
+    print("Response JSON:", response.json())
+except:
+    print("Response Text:", response.text)
+
+if response.status_code == 200 or response.status_code == 201:
+    print("Application successfull")
 else:
-    print(f"Failed with status {response.status_code}: {response.text}")
-    exit(1) 
+    print("Submission failed.")
+    exit(1)
